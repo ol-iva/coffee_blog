@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
@@ -37,10 +39,6 @@ class Article
      */
     private $category;
 
-//    /**
-//     * @ORM\ManyToOne(targetEntity="App\Entity\Author", inversedBy="articles")
-//     */
-//    private $author;
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="authorArticles")
      * @ORM\JoinColumn(nullable=false)
@@ -50,7 +48,10 @@ class Article
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $imageNumber;
+    private $image;
+
+    private $imageFile;
+
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -64,6 +65,50 @@ class Article
     public function __toString()
     {
         return $this->title ? $this->title : 'New article';
+    }
+
+    public function imageUpload()
+    {
+        $file = $this->getImageFile();
+
+        if (!$file || !$file instanceof UploadedFile) {
+//            $this->setImage(null);
+            return;
+        }
+        $fileName = uniqid() . '.' . $file->guessExtension();
+
+        try {
+            $file->move(
+                realpath('images'),
+                $fileName
+            );
+            $this->trashImage();
+
+            $this->setImage($fileName);
+
+        } catch (FileException $exception) {
+            // handle exception
+        }
+    }
+
+    /**
+     * @ORM/PostRemove
+     */
+    public function trashImage()
+    {
+        $oldFile = realpath('images') . '/' . $this->getImage();
+
+        if (is_file($oldFile){
+        unlink($oldFile)
+        };
+    }
+
+    public function getImagePath()
+    {
+        if ($this->getImage()) {
+            return "/images/{$this->getImage()}";
+        };
+        return "/images/1.jpg";
     }
 
     /**
@@ -141,7 +186,6 @@ class Article
         return $this;
     }
 
-
     public function getPublishedAt(): ?\DateTimeInterface
     {
         return $this->publishedAt;
@@ -154,16 +198,25 @@ class Article
         return $this;
     }
 
-    public function getImageNumber(): ?string
+    public function getImage(): ?string
     {
-        return $this->imageNumber;
+        return $this->image;
     }
 
-    public function setImageNumber($imageNumber): self
+    public function setImage($imageNumber): self
     {
-        $this->imageNumber = $imageNumber;
+        $this->image = $imageNumber;
 
         return $this;
     }
 
+    public  function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile($imageFile): void
+    {
+        $this->imageFile = $imageFile;
+    }
 }

@@ -10,8 +10,6 @@ class ArticlePostVoter extends Voter
 {
     protected function supports($attribute, $subject)
     {
-        // replace with your own logic
-        // https://symfony.com/doc/current/security/voters.html
         return in_array($attribute, ['true', 'false']);
 //            && $subject instanceof \App\Entity\Article;
     }

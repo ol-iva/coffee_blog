@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Service;
-
 
 use App\Repository\RecipeRepository;
 
@@ -17,9 +15,7 @@ class GetRandomRecipeService
 
     public function getRandomRecipe()
     {
-       $id = rand(1, 12);
+        $id = rand(1, 12);
         return $this->recipeRepository->find($id);
     }
-
-
 }

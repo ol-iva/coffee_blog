@@ -16,7 +16,7 @@ class BlogController extends AbstractController
      */
     public function homepage(ArticleRepository $articleRepository,
                              CategoryRepository $categoryRepository,
-                             GetRandomRecipeService $randomRecipe) :Response
+                             GetRandomRecipeService $randomRecipe): Response
     {
         $articles = $articleRepository->findAll();
 
@@ -24,13 +24,10 @@ class BlogController extends AbstractController
 
         $randomRecipe = $randomRecipe->getRandomRecipe();
 
-         return $this->render('blog.html.twig', [
-             'articles' => $articles,
-                 'categories' => $categories,
-                 'randomRecipe' => $randomRecipe
-            ]);
+        return $this->render('blog.html.twig', [
+            'articles' => $articles,
+            'categories' => $categories,
+            'randomRecipe' => $randomRecipe
+        ]);
     }
-
-
-
 }

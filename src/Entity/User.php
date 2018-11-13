@@ -35,13 +35,13 @@ class User extends BaseUser
         return $this->getUsername();
     }
 
-    /**
-     * @return Collection|Article[]
-     */
-    public function getAuthorArticles(): Collection
-    {
-        return $this->authorArticles;
-    }
+//    /**
+//     * @return Collection|Article[]
+//     */
+//    public function getAuthorArticles(): Collection
+//    {
+//        return $this->authorArticles;
+//    }
 
     public function addAuthorArticle(Article $authorArticle): self
     {

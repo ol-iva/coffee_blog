@@ -8,7 +8,7 @@ use App\Service\GetRandomRecipeService;
 
 class CoffeeRecipeController extends AbstractController
 {
-     /**
+    /**
      * @Route("/coffee-recipe", name="coffee-recipe")
      */
     public function coffeeRecipe(GetRandomRecipeService $randomRecipe)
@@ -17,7 +17,6 @@ class CoffeeRecipeController extends AbstractController
         return $this->render('coffee_recipe.html.twig', [
                 'randomRecipe' => $randomRecipe
             ]
-        )
-        ;
+        );
     }
 }

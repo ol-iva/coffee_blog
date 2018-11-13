@@ -6,7 +6,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 
-
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
  */
@@ -28,10 +27,12 @@ class Category
      * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="category")
      */
     private $articles;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
     }
+
     public function __toString()
     {
         return $this->title ? $this->title : 'New';
@@ -53,6 +54,7 @@ class Category
 
         return $this;
     }
+
     /**
      * @return Collection|Article[]
      */
@@ -60,20 +62,22 @@ class Category
     {
         return $this->articles;
     }
+
     public function addArticle(Article $article): self
     {
-       if (!$this->articles->contains($article)){
-           $this->articles[] = $article;
-           $article->setCategory($this);
-       }
-       return $this;
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->setCategory($this);
+        }
+        return $this;
     }
+
     public function removeArticle(Article $article): self
     {
-        if (!$this->articles->contains($article)){
+        if (!$this->articles->contains($article)) {
             $this->articles->removeElement($article);
             //set the owing side to null (unless already changed)
-            if ($article->getCategory() === $this){
+            if ($article->getCategory() === $this) {
                 $article->setCategory(null);
             }
         }

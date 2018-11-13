@@ -3,7 +3,7 @@
 {% block articleContent %}
 
     <h1>{{ article.title }}</h1>
-    <img class="" src="/images/{{ article.imageNumber }}.jpg">
+    <img class="" src="/images/{{ article.image}}">
     <h4>Published by {{ article.author }}</h4>
     <p>
         <span>Published at {{ article.publishedAt|date('Y-m-d')|default('Unpublished')}}</span>

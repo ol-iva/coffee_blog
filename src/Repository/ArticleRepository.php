@@ -30,14 +30,11 @@ class ArticleRepository extends ServiceEntityRepository
             ->andWhere('articles.category = :category')
             ->setParameter('category', $category)
             ->orderBy('articles.id', 'DESC')
-            ->setMaxResults(10)
-        ;
+            ->setMaxResults(10);
         return $qb
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-
 
 //    /*
 //    public function findOneBySomeField($value): ?Article
