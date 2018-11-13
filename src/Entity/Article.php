@@ -98,9 +98,9 @@ class Article
     {
         $oldFile = realpath('images') . '/' . $this->getImage();
 
-        if (is_file($oldFile){
-        unlink($oldFile)
-        };
+        if (is_file($oldFile)){
+        unlink($oldFile);
+        }
     }
 
     public function getImagePath()
