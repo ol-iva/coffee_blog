@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block pageContent %}
+    <div class="about">
+        <h3>About us</h3>
+        <h5>{{ about|raw}}</h5>
+    </div>
+    <h3>Contact us</h3>
+    <ul class="contact-us-page">
+        <li>adress: Ukraine, Kyiv, 44, Nezalegznosti</li>
+        <li><a href="mailto:coffe.man@gmail.com">e-mail: coffee.man@gmail.com</a></li>
+        <li><a href="tel:04470677">tel: 044 706 77 18</a></li>
+    </ul>
+{% endblock %}

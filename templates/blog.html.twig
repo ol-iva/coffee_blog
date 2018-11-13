@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block articlesList %}
+    {% if is_granted('false') %}
+        {#{{ dump(app.user) }}#}
+    {% endif %}
+    <div class="row w-100">
+        <ul class="col-12 list-group list-unstyled w-100">
+            {% for article in articles %}
+            <li class="row list-group-item">
+                <div class="col-md-2">
+                    <img class="img-article" src="/images/{{ article.imageNumber }}.jpg">
+                </div>
+                <div class="col-md-10 offset-md-3">
+                    <h2 class="title-article">{{ article.title }}</h2>
+                    <div class="box"
+                        <p class="short-content-article">{{ article.content|raw }}</p>
+                    </div>
+                </div>
+                     <a href="{{ getArticleUrlById(article.slug) }}" class="btn btn-outline-dark" role="button">Read more...</a>
+                    <a href="{{ path('article_edit', {'slug': article.slug}) }}" class="btn btn-outline-dark" role="button">edit</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
+{% block listCategories %}
+    <div class="row w-100">
+        <h3>Article's Category</h3>
+         <ul class="col-12 list-group w-100">
+            {% for category in categories %}
+            <li class="row list-group-item d-flex justify-content-between ">
+                <a href="{{ path('articles-of-category', {'category':category.id}) }}">{{ category.title }}</a><span class="badge badge-dark badge-pill">{{ category.articles|length }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
+{% block coffeeRecipe %}
+    <a href="{{ path('coffee-recipe', {'id':randomRecipe.id}) }}"><div class="row">
+            <h3 class="title-sidebar">Your coffee today</h3>
+        </div>
+        <div class="row">
+            <img class="img-recipe" src="/images/{{ randomRecipe.imageName }}.jpg">
+            <h4 class="title-article-sidebar">{{randomRecipe.title}}</h4>
+            <p class="content-article-sidebar">{{ randomRecipe.content|raw }}</p>
+        </div></a>
+{% endblock %}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Coffee art{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
+        <link rel="shortcut icon" type="image/x-icon" href="/images/faveicon.png">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Krub" rel="stylesheet">
+    {% endblock %}
+    <meta name="keywords" content="coffee prices,coffee history,blue harvest,coffee unified,direct trade,fair trade,prices,coffee,coffee exchange,coffee farmers,daily coffee news,farmers,agriculture,quality,climate,climate change and coffee,quality coffee,regenerative agriculture,equator coffee &amp; tea,expo,flo,keurig green mountain,matchmaker,organic">
+</head>
+<body class="container">
+{% block body %}
+    <header class="header fixed-top">
+        {% block header %}
+            <div class="row topbar-social">
+                <div class="col-1 offset-9">
+                    <a href="https://facebook.com/">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                </div>
+                <div class="col-1 icon">
+                    <a href="https://instagram.com">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+                <div class="col-1 icon">
+                    <a href="https://twitter.com">
+                        <i class="fab fa-twitter-square"></i>
+                    </a>
+                </div>
+            </div>
+            <nav class="col-12 navbar navbar-expand-lg navbar-light bg-dark">
+                <div class="nav-item">
+                    <h1 class="title-site white">Coffee art</h1>
+                    <span class="title-description white">All about coffee producing</span>
+                </div>
+                <div class="row collapse navbar-collapse">
+                    <div class="col-2 offset-md-2 nav-item active">
+                        <a href="{{ path('blog') }}" class="nav-link">Home<span class="sr-only"></span></a>
+                        {#<a href="#" class="nav-link">Home<span class="sr-only">(current)</span></a>#}
+                    </div>
+                    {#<div class="col-2 nav-item">#}
+                        {#<a href="#" class="nav-link">Wire</a>#}
+                    {#</div>#}
+                    {#<div class="col-2 nav-item">#}
+                        {#<a href="#" class="nav-link">News</a>#}
+                    {#</div>#}
+                    <div class="col-2 nav-item">
+                        <a href="{{ path('contact') }}" class="nav-link">Contact</a>
+                    </div>
+                </div>
+            </nav>
+        {% endblock %}
+    </header>
+    {% block logobar %}
+    <section class="row logobar">
+
+    </section>
+    {% endblock %}
+    <section class="row">
+        {% block pageContent %}
+            <aside class="col-md-2 d-sm-none d-md-block">
+                {% block listCategories %}
+                {% endblock %}
+                {% block coffeeRecipe %}
+                {% endblock %}
+            </aside>
+            <article class="col-md-10">
+                {% block articlesList %}
+                {% endblock %}
+                {% block articleContent %}
+                {% endblock %}
+            </article>
+        {% endblock %}
+    </section>
+    <footer class="row">
+        {% block footer %}
+            <div class="col-4 offset-1 contacts">
+                <p>Address</p>
+                <p>Ukraine, Kyiv, 44, Nezalegznosti</p>
+            </div>
+            <div class="col-4 offset-2">
+                <p><a href="mailto:coffee.man@gmail.com">e-mail: coffee.man@gmail.com</a></p>
+                <p><a href="tel:0447067718">tel: 044 706 77 18</a></p>
+            </div>
+        {% endblock %}
+    </footer>
+{% endblock %}
+</body>
+</html>
+

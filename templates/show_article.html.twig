@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block articleContent %}
+
+    <h1>{{ article.title }}</h1>
+    <img class="" src="/images/{{ article.imageNumber }}.jpg">
+    <h4>Published by {{ article.author }}</h4>
+    <p>
+        <span>Published at {{ article.publishedAt|date('Y-m-d')|default('Unpublished')}}</span>
+    </p>
+    <p>
+        {{ article.content|raw }}
+    </p>
+    {#<a href="{{ article.id|getArticleUrlById }}" class="btn btn-outline-dark" role="button">Read more...</a>#}
+    <a href="{{ path('article_edit', {'slug': article.slug}) }}" class="btn btn-outline-dark" role="button">edit</a>
+
+{% endblock %}

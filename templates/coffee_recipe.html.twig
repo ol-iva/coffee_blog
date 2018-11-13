@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block logobar %}
+    <div class="img-coffee-recipe center-block">
+        <img src="/images/{{ randomRecipe.imageName }}.jpg">
+    </div>
+{% endblock %}
+{% block pageContent %}
+    <div class="coffee-recipe-content">
+        <h1>{{ randomRecipe.title }}</h1>
+
+        <p>{{ randomRecipe.content|raw }}</p>
+    </div>
+{% endblock %}
