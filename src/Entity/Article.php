@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Repository\ArticleRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -27,7 +28,7 @@ class Article
     /**
      * @ORM\Column(type="string", length=100, unique=true)
      */
-    private $slug = 'coffee-is-the-best-your-choice';
+    private $slug;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -58,10 +59,11 @@ class Article
      */
     private $publishedAt;
 
-//    public function __construct()
-//    {
-//        $this->publishedAt = new \DateTime();
-//    }
+    public function __construct()
+    {
+        $this->publishedAt = new \DateTime();
+    }
+
     public function __toString()
     {
         return $this->title ? $this->title : 'New article';
@@ -91,15 +93,15 @@ class Article
         }
     }
 
-    /**
-     * @ORM/PostRemove
-     */
+//    /**
+//     * @ORM/PostRemove
+//     */
     public function trashImage()
     {
         $oldFile = realpath('images') . '/' . $this->getImage();
 
-        if (is_file($oldFile)){
-        unlink($oldFile);
+        if (is_file($oldFile)) {
+            unlink($oldFile);
         }
     }
 
@@ -148,6 +150,19 @@ class Article
         $this->slug = $slug;
 
         return $this;
+    }
+
+    public function uploadSlug(ArticleRepository $articleRepository): ?string
+    {
+        $slugTemporary = preg_replace('/\s+/', '-', mb_strtolower($this->getTitle()));
+        $slug = $slugTemporary;
+        $n = 1;
+
+        while ($articleRepository->findOneBy(['slug' => $slug])) {
+            $slug = $slugTemporary . '-' . $n;
+            $n = $n + 1;
+        };
+        return $slug;
     }
 
     public function getContent(): ?string
@@ -210,7 +225,7 @@ class Article
         return $this;
     }
 
-    public  function getImageFile()
+    public function getImageFile()
     {
         return $this->imageFile;
     }

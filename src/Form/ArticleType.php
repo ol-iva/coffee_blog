@@ -15,10 +15,10 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, ['label' => 'Title of your new article', 'required' => true])
-            ->add('slug', TextType::class, ['label' => 'Enter slug for your article with "-"'])
+//            ->add('slug', TextType::class, ['label' => 'Enter slug for your article with "-"'])
             ->add('content', TextType::class, ['label' => 'Content of new article'])
             ->add('imageFile', FileType::class, ['label' => 'Choose image for a new article', 'required' => false])
-//            ->add('publishedAt', null, ['label' => 'Article will be published at'])
+            ->add('publishedAt', null, ['label' => 'Article will be published at'])
             ->add('category', null, ['label' => 'Select category for new article']);
     }
 

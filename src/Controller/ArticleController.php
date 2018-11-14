@@ -24,7 +24,7 @@ class ArticleController extends AbstractController
      *
      * @Route("/new", name="article_new", methods="GET|POST")
      */
-    public function new(Request $request): Response
+    public function new(Request $request, ArticleRepository $articleRepository): Response
     {
         $article = new Article();
 //        $article->getAuthor($this->getUser());
@@ -36,6 +36,9 @@ class ArticleController extends AbstractController
             $article->imageUpload();
 
             $article->setAuthor($this->getUser());
+
+            $slug = $article->uploadSlug($articleRepository);
+            $article->setSlug($slug);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);
